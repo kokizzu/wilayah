@@ -81,6 +81,9 @@ link demo bisa dilihat [di sini](https://wilayah.cahyadsn.com/apps/) (data sesua
 - Kode dan Data Wilayah Administrasi Pemerintahan (Permendagri No.56-2015) www.kemendagri.go.id/pages/data-wilayah (Berita Negara Republik Indonesia Tahun 2015 Nomor 1045, Ditetapkan pada tanggal 29 Juni 2015)
 
 ## New Update
+- security hardening and frontend unit testing 2026-09-08
+    - mitigated Login CSRF vulnerability in `login.php` with session token generation, hidden input injection, and `hash_equals()` validation
+    - added Jest unit test suite for `do_ajax()` in `ajax.js` (`tests/apps/js/ajax.test.js`)
 - performance optimization for AJAX caching, reverse lookup, and basemap DOM queries 2026-09-03
     - cached full JSON responses in `geo_ajax.php` using file cache (1-day TTL) to avoid redundant database queries and polygon calculations
     - eliminated repeated JSON decoding in `reverse_lookup.php` `pointInPath` by passing pre-decoded coordinate arrays directly

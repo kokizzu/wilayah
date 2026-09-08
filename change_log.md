@@ -1,6 +1,8 @@
 # CHANGE LOG 
 
 ## LATEST UPDATES
+- Fix Login CSRF vulnerability in apps/login.php with session token initialization, form injection, and hash_equals() validation 2026-09-08
+- Add Jest unit test suite for do_ajax() function in apps/js/ajax.js (tests/apps/js/ajax.test.js) 2026-09-08
 - Cache full JSON response in apps/inc/geo_ajax.php to avoid redundant database queries and geometry processing 2026-09-03
 - Refactor pointInPath in apps/inc/reverse_lookup.php to receive pre-decoded coordinates directly, removing redundant JSON decoding in lookup loop 2026-09-03
 - Cache basemap options DOM query in apps/inc/geo_js.php to avoid redundant layout recalculations on layer changes 2026-09-03
