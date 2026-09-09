@@ -70,4 +70,23 @@ class GeoUtilsTest extends TestCase {
         $this->assertTrue(isPathNearCentroid($path, 5.0, 5.0, '12'));
         $this->assertTrue(isPathNearCentroid($path, 7.5, 7.5, '12'));
     }
+
+    public function testInvalidCoordsInPoints() {
+        // Path containing invalid coordinate entries mixed with valid ones
+        // valid points: [0,0], [0,10], [10,10], [10,0]
+        // latMin = 0, latMax = 10 -> centerLat = 5
+        // lngMin = 0, lngMax = 10 -> centerLng = 5
+        $path = '[[0,0], "invalid_string", [5], [0,10], null, [10,10], [10,0]]';
+
+        // The invalid points should be skipped, and the bounding box should still be calculated correctly
+        $this->assertTrue(isPathNearCentroid($path, 5.0, 5.0, '12'));
+        $this->assertTrue(isPathNearCentroid($path, 7.5, 7.5, '12'));
+        $this->assertFalse(isPathNearCentroid($path, 100.0, 100.0, '12'));
+
+        // Path where the first element is not an array, causing $points to be empty
+        $this->assertFalse(isPathNearCentroid('["invalid"]', 5.0, 5.0, '12'));
+
+        // Path with missing inner arrays
+        $this->assertFalse(isPathNearCentroid('[null]', 5.0, 5.0, '12'));
+    }
 }
