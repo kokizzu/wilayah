@@ -136,6 +136,7 @@ class ReverseLookupTest extends TestCase
         $this->assertFalse(pointInRing(5, 5, 'string'));
         $this->assertFalse(pointInRing(5, 5, [ [0], [1], [2] ]));
         $this->assertFalse(pointInRing(5, 5, [ ["a", "b"], ["c", "d"], ["e", "f"] ]));
+        $this->assertFalse(pointInRing(5, 5, ['invalid', 'invalid', 'invalid']));
     }
 
     public function testBuildChainFull()
