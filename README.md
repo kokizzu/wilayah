@@ -181,7 +181,11 @@ node tools/check_sql_wilayah_pulau.js
 - penambahan data kode pulau di web demo
 
 ## CHANGE LOG
-- [2026-09-08] 🆕
+- [2026-09-09] 🆕
+  - Add Jest unit test suite for `setSafeSelectOptions()` in [`tests/apps/inc/geo_js.test.js`](tests/apps/inc/geo_js.test.js) to verify DOM option parsing, sanitization, and clearing.
+  - Add unit test coverage for `pointInRing` with invalid string coordinate arrays in [`tests/apps/inc/ReverseLookupTest.php`](tests/apps/inc/ReverseLookupTest.php).
+  - Add unit test coverage for `isPathNearCentroid` handling invalid and non-numeric coordinate items in [`tests/inc/GeoUtilsTest.php`](tests/inc/GeoUtilsTest.php).
+- [2026-09-08]
   - Mitigate Login CSRF vulnerability in [`apps/login.php`](apps/login.php) with CSRF session token initialization, form injection, and constant-time `hash_equals()` validation on POST requests; update [`tests/AppsLoginTest.php`](tests/AppsLoginTest.php) with invalid token test coverage.
   - Add Jest unit test suite for `do_ajax()` in [`tests/apps/js/ajax.test.js`](tests/apps/js/ajax.test.js) and add `jest` devDependency to `package.json`.
 - [2026-09-03]

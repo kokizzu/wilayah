@@ -81,6 +81,10 @@ link demo bisa dilihat [di sini](https://wilayah.cahyadsn.com/apps/) (data sesua
 - Kode dan Data Wilayah Administrasi Pemerintahan (Permendagri No.56-2015) www.kemendagri.go.id/pages/data-wilayah (Berita Negara Republik Indonesia Tahun 2015 Nomor 1045, Ditetapkan pada tanggal 29 Juni 2015)
 
 ## New Update
+- unit test coverage enhancements 2026-09-09
+    - added Jest unit test suite for `setSafeSelectOptions()` in `apps/inc/geo_js.php` (`tests/apps/inc/geo_js.test.js`)
+    - added test coverage for `pointInRing` with invalid string coordinates (`tests/apps/inc/ReverseLookupTest.php`)
+    - added test coverage for `isPathNearCentroid` with invalid coordinates (`tests/inc/GeoUtilsTest.php`)
 - security hardening and frontend unit testing 2026-09-08
     - mitigated Login CSRF vulnerability in `login.php` with session token generation, hidden input injection, and `hash_equals()` validation
     - added Jest unit test suite for `do_ajax()` in `ajax.js` (`tests/apps/js/ajax.test.js`)

@@ -1,6 +1,9 @@
 # CHANGE LOG 
 
 ## LATEST UPDATES
+- Add Jest unit test suite for setSafeSelectOptions() in apps/inc/geo_js.php (tests/apps/inc/geo_js.test.js) 2026-09-09
+- Add test coverage for pointInRing with invalid string coordinates in tests/apps/inc/ReverseLookupTest.php 2026-09-09
+- Add test coverage for isPathNearCentroid with invalid coordinates in tests/inc/GeoUtilsTest.php 2026-09-09
 - Fix Login CSRF vulnerability in apps/login.php with session token initialization, form injection, and hash_equals() validation 2026-09-08
 - Add Jest unit test suite for do_ajax() function in apps/js/ajax.js (tests/apps/js/ajax.test.js) 2026-09-08
 - Cache full JSON response in apps/inc/geo_ajax.php to avoid redundant database queries and geometry processing 2026-09-03
