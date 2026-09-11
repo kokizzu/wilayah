@@ -1,6 +1,10 @@
 # CHANGE LOG 
 
 ## LATEST UPDATES
+- Extract shared province HTML dropdown generation into getProvinceOptionsHTML() in apps/inc/geo_helpers.php and reuse across apps/index.php and index.php 2026-09-11
+- Return raw array from fallbackBox() in apps/inc/geo_helpers.php to avoid redundant json_decode cycles in reverse lookup 2026-09-11
+- Optimize bounding box array presence checks with isset() in apps/inc/geo_ajax.php 2026-09-11
+- Update file header last edit timestamps on modified files to match modification history 2026-09-11
 - Add Jest unit test suite for setSafeSelectOptions() in apps/inc/geo_js.php (tests/apps/inc/geo_js.test.js) 2026-09-09
 - Add test coverage for pointInRing with invalid string coordinates in tests/apps/inc/ReverseLookupTest.php 2026-09-09
 - Add test coverage for isPathNearCentroid with invalid coordinates in tests/inc/GeoUtilsTest.php 2026-09-09

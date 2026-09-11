@@ -81,6 +81,11 @@ link demo bisa dilihat [di sini](https://wilayah.cahyadsn.com/apps/) (data sesua
 - Kode dan Data Wilayah Administrasi Pemerintahan (Permendagri No.56-2015) www.kemendagri.go.id/pages/data-wilayah (Berita Negara Republik Indonesia Tahun 2015 Nomor 1045, Ditetapkan pada tanggal 29 Juni 2015)
 
 ## New Update
+- province helper refactoring, fallback array optimization, and bounding box checks 2026-09-11
+    - extracted shared `getProvinceOptionsHTML()` helper in `apps/inc/geo_helpers.php` for `apps/index.php` and `index.php`
+    - optimized `fallbackBox()` to return raw arrays to eliminate redundant `json_decode` cycles in reverse lookups
+    - optimized bounding box coordinate array checks using `isset()` in `geo_ajax.php`
+    - synchronized file header `last edit` timestamps on modified files
 - unit test coverage enhancements 2026-09-09
     - added Jest unit test suite for `setSafeSelectOptions()` in `apps/inc/geo_js.php` (`tests/apps/inc/geo_js.test.js`)
     - added test coverage for `pointInRing` with invalid string coordinates (`tests/apps/inc/ReverseLookupTest.php`)

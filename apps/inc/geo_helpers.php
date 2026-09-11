@@ -4,8 +4,13 @@ BISMILLAAHIRRAHMAANIRRAHIIM - In the Name of Allah, Most Gracious, Most Merciful
 ================================================================================
 filename : geo_helpers.php
 purpose  : Shared geometric helper functions
+create   : 2026-06-17
+last edit: 2026-09-11 09:59:31
+author   : cahya dsn
 ================================================================================
-*/
+MIT License
+copyright (c) 2026 by cahya dsn; cahyadsn@gmail.com
+================================================================================*/
 
 function fallbackBox($lat, $lng, $delta = 0.01) {
     return array(

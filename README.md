@@ -181,7 +181,12 @@ node tools/check_sql_wilayah_pulau.js
 - penambahan data kode pulau di web demo
 
 ## CHANGE LOG
-- [2026-09-09] 🆕
+- [2026-09-11] 🆕
+  - Extract shared province HTML dropdown generation into `getProvinceOptionsHTML()` in [`apps/inc/geo_helpers.php`](apps/inc/geo_helpers.php) and reuse across [`apps/index.php`](apps/index.php) and [`index.php`](index.php).
+  - Return raw array from `fallbackBox()` in [`apps/inc/geo_helpers.php`](apps/inc/geo_helpers.php) to avoid redundant `json_decode` cycles during reverse lookup spatial calculations.
+  - Optimize bounding box coordinate presence checks with `isset()` in [`apps/inc/geo_ajax.php`](apps/inc/geo_ajax.php).
+  - Update file header `last edit` timestamps on modified files to match Git commit modification history.
+- [2026-09-09]
   - Add Jest unit test suite for `setSafeSelectOptions()` in [`tests/apps/inc/geo_js.test.js`](tests/apps/inc/geo_js.test.js) to verify DOM option parsing, sanitization, and clearing.
   - Add unit test coverage for `pointInRing` with invalid string coordinate arrays in [`tests/apps/inc/ReverseLookupTest.php`](tests/apps/inc/ReverseLookupTest.php).
   - Add unit test coverage for `isPathNearCentroid` handling invalid and non-numeric coordinate items in [`tests/inc/GeoUtilsTest.php`](tests/inc/GeoUtilsTest.php).
