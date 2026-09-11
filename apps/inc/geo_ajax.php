@@ -36,7 +36,7 @@ function isPathReasonable($path, $lat, $lng, $kode) {
   $lngMin = $lngMax = (float)($points[0][1] ?? 0);
 
   foreach ($points as $pt) {
-    if (!is_array($pt) || count($pt) < 2) continue;
+    if (!isset($pt[0], $pt[1])) continue;
     $plat = (float)$pt[0];
     $plng = (float)$pt[1];
 
