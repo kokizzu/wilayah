@@ -54,8 +54,8 @@ class AppsIndexTest extends TestCase
 
         // Modify cache_file path so it writes to the system temp dir during tests
         $code = str_replace(
-            "\$cache_file = __DIR__ . '/cache/provinsi_cache.html';",
-            "\$cache_file = sys_get_temp_dir() . '/provinsi_cache_' . md5(uniqid()) . '.html';",
+            "__DIR__ . '/cache/provinsi_cache.html'",
+            "sys_get_temp_dir() . '/provinsi_cache_' . md5(uniqid()) . '.html'",
             $code
         );
 

@@ -20,6 +20,7 @@ if (empty($_SESSION['csrf_token'])) {
 $theme = $_SESSION['theme'] ?? $_GET['theme'] ?? 'light';
 define("_AUTHOR","cahyadsn");
 require_once 'inc/db.php';
+require_once 'inc/geo_helpers.php';
 $version='3.0.1';
 header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + 86400));
 header('Cache-Control: public, max-age=86400');
@@ -129,26 +130,7 @@ header('Pragma: cache');
                   <label for="prop">Provinsi</label>
                   <select name="prop" id="prop" class="form-select" onchange="ajax(this.value)">
                     <option value="">Pilih Provinsi</option>
-                    <?php
-                    $cache_file = __DIR__ . '/cache/provinsi_cache.html';
-                    $cache_ttl = 86400;
-
-                    if (file_exists($cache_file) && (time() - filemtime($cache_file) < $cache_ttl)) {
-                      echo file_get_contents($cache_file);
-                    } else {
-                      $query=$db->prepare("SELECT kode,nama FROM {$tbl_wilayah} WHERE CHAR_LENGTH(kode)=2 ORDER BY nama");
-                      $query->execute();
-                      $arr = [];
-                      while ($data=$query->fetchObject()){
-                        $kode = htmlspecialchars($data->kode, ENT_QUOTES, 'UTF-8');
-                        $nama = htmlspecialchars($data->nama, ENT_QUOTES, 'UTF-8');
-                        $arr[] = '<option value="'.$kode.'">'.$nama.'</option>';
-                      }
-                      $html = implode('', $arr);
-                      file_put_contents($cache_file, $html, LOCK_EX);
-                      echo $html;
-                    }
-                    ?>
+                    <?php echo getProvinceOptionsHTML($db, $tbl_wilayah, __DIR__ . '/cache/provinsi_cache.html'); ?>
                   </select>
                 </div>
               </div>

@@ -27,6 +27,7 @@ copyright (c) 2017-2022 by cahya dsn; cahyadsn@gmail.com
 ================================================================================*/
 //--- Database configuration
 require_once 'apps/inc/db.php';
+require_once 'apps/inc/geo_helpers.php';
 $wil=array(
 	2=>array(5,'Kota/Kabupaten','kab'),
 	5=>array(8,'Kecamatan','kec'),
@@ -112,26 +113,7 @@ if (isset($_GET['id']) && is_string($_GET['id']) && !empty($_GET['id'])){
 			<td>
 				<select id="prov" onchange="ajax(this.value)">
 					<option value="">Provinsi</option>
-					<?php 
-					$cache_file = __DIR__ . '/cache/provinsi_cache.html';
-					$cache_ttl = 86400;
-
-					if (file_exists($cache_file) && (time() - filemtime($cache_file) < $cache_ttl)) {
-						echo file_get_contents($cache_file);
-					} else {
-						$query=$db->prepare("SELECT kode,nama FROM wilayah WHERE CHAR_LENGTH(kode)=2 ORDER BY nama");
-						$query->execute();
-						$arr = [];
-						while ($data=$query->fetchObject()){
-							$kode = htmlspecialchars($data->kode, ENT_QUOTES, 'UTF-8');
-							$nama = htmlspecialchars($data->nama, ENT_QUOTES, 'UTF-8');
-							$arr[] = '<option value="'.$kode.'">'.$nama.'</option>';
-						}
-						$html = implode('', $arr);
-						file_put_contents($cache_file, $html, LOCK_EX);
-						echo $html;
-					}
-					?>
+						<?php echo getProvinceOptionsHTML($db, "wilayah", __DIR__ . "/cache/provinsi_cache.html"); ?>
 				</select>
 			</td>
 		</tr>
