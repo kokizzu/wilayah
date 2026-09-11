@@ -167,7 +167,7 @@ class IndexPhpTest extends TestCase
      */
     public function testProvinceDropdownQuery(): void
     {
-        $content = file_get_contents(__DIR__ . '/../../apps/index.php');
+        $content = file_get_contents(__DIR__ . '/../../apps/inc/geo_helpers.php');
 
         $this->assertStringContainsString('CHAR_LENGTH(kode)=2', $content,
             'Query must filter for 2-digit province codes');
@@ -286,7 +286,7 @@ class IndexPhpTest extends TestCase
      */
     public function testDatabaseQueryPattern(): void
     {
-        $content = file_get_contents(__DIR__ . '/../../apps/index.php');
+        $content = file_get_contents(__DIR__ . '/../../apps/inc/geo_helpers.php');
 
         // Check for PDO prepared statements
         $this->assertStringContainsString('$db->prepare', $content,
