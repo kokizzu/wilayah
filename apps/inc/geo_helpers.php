@@ -8,12 +8,12 @@ purpose  : Shared geometric helper functions
 */
 
 function fallbackBox($lat, $lng, $delta = 0.01) {
-    return json_encode(array(
+    return array(
         array((float)$lat - $delta, (float)$lng - $delta),
         array((float)$lat + $delta, (float)$lng - $delta),
         array((float)$lat + $delta, (float)$lng + $delta),
         array((float)$lat - $delta, (float)$lng + $delta)
-    ));
+    );
 }
 
 function fallbackPathForCode($lat, $lng, $kode) {

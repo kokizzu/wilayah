@@ -77,7 +77,7 @@ if (!empty($_GET['id']) && is_string($_GET['id'])){
       if(!empty($d) && !empty($d->kode)){
         $path=$d->path;
         if(empty($path) || !isPathReasonable($path, $d->lat, $d->lng, $d->kode)){
-          $path = fallbackPathForCode($d->lat, $d->lng, $d->kode);
+          $path = json_encode(fallbackPathForCode($d->lat, $d->lng, $d->kode));
         }
         $data=array('kode'=>$d->kode,'nama'=>$d->nama,'lat'=>$d->lat,'lng'=>$d->lng,'path'=>$path,'luas'=>$d->luas,'penduduk'=>$d->penduduk);
         $r=array('status'=>true,'data'=>$data);
