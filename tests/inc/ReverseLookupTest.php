@@ -71,34 +71,35 @@ class ReverseLookupTest extends TestCase
 
     public function testPointInPath(): void
     {
-        // Simple 1-ring path JSON
-        $singleRingJson = json_encode([
+        // Simple 1-ring path array
+        $singleRingArray = [
             [
                 [0, 0], [0, 10], [10, 10], [10, 0]
             ]
-        ]);
+        ];
 
-        $this->assertTrue(pointInPath(5, 5, $singleRingJson));
-        $this->assertFalse(pointInPath(15, 15, $singleRingJson));
+        $this->assertTrue(pointInPath(5, 5, $singleRingArray));
+        $this->assertFalse(pointInPath(15, 15, $singleRingArray));
 
-        // Multi-ring path JSON (e.g. islands)
-        $multiRingJson = json_encode([
+        // Multi-ring path array (e.g. islands)
+        $multiRingArray = [
             [
                 [0, 0], [0, 10], [10, 10], [10, 0]
             ],
             [
                 [20, 20], [20, 30], [30, 30], [30, 20]
             ]
-        ]);
+        ];
 
-        $this->assertTrue(pointInPath(5, 5, $multiRingJson));
-        $this->assertTrue(pointInPath(25, 25, $multiRingJson));
-        $this->assertFalse(pointInPath(15, 15, $multiRingJson));
+        $this->assertTrue(pointInPath(5, 5, $multiRingArray));
+        $this->assertTrue(pointInPath(25, 25, $multiRingArray));
+        $this->assertFalse(pointInPath(15, 15, $multiRingArray));
 
         // Empty or invalid inputs
         $this->assertFalse(pointInPath(5, 5, ''));
         $this->assertFalse(pointInPath(5, 5, 'not-json'));
         $this->assertFalse(pointInPath(5, 5, '[]'));
+        $this->assertFalse(pointInPath(5, 5, []));
     }
 
     public function testPathLooksNearCentroid(): void
@@ -210,13 +211,13 @@ class ReverseLookupTest extends TestCase
         // Test with short code (< 8 chars), delta should be 0.01
         $shortCode = '11.01';
         $expectedDelta1 = 0.01;
-        $expectedJson1 = json_encode([
+        $expectedJson1 = [
             [$lat - $expectedDelta1, $lng - $expectedDelta1],
             [$lat + $expectedDelta1, $lng - $expectedDelta1],
             [$lat + $expectedDelta1, $lng + $expectedDelta1],
             [$lat - $expectedDelta1, $lng + $expectedDelta1]
-        ]);
-        $this->assertJsonStringEqualsJsonString(
+        ];
+        $this->assertEquals(
             $expectedJson1,
             fallbackPathForCode($lat, $lng, $shortCode),
             'Fallback path for short code (<8) is incorrect'
@@ -225,13 +226,13 @@ class ReverseLookupTest extends TestCase
         // Test with medium code (8 <= chars < 13), delta should be 0.008
         $mediumCode = '11.01.01'; // 8 chars
         $expectedDelta2 = 0.008;
-        $expectedJson2 = json_encode([
+        $expectedJson2 = [
             [$lat - $expectedDelta2, $lng - $expectedDelta2],
             [$lat + $expectedDelta2, $lng - $expectedDelta2],
             [$lat + $expectedDelta2, $lng + $expectedDelta2],
             [$lat - $expectedDelta2, $lng + $expectedDelta2]
-        ]);
-        $this->assertJsonStringEqualsJsonString(
+        ];
+        $this->assertEquals(
             $expectedJson2,
             fallbackPathForCode($lat, $lng, $mediumCode),
             'Fallback path for medium code (>=8, <13) is incorrect'
@@ -240,13 +241,13 @@ class ReverseLookupTest extends TestCase
         // Test with long code (>= 13 chars), delta should be 0.004
         $longCode = '11.01.01.2001'; // 13 chars
         $expectedDelta3 = 0.004;
-        $expectedJson3 = json_encode([
+        $expectedJson3 = [
             [$lat - $expectedDelta3, $lng - $expectedDelta3],
             [$lat + $expectedDelta3, $lng - $expectedDelta3],
             [$lat + $expectedDelta3, $lng + $expectedDelta3],
             [$lat - $expectedDelta3, $lng + $expectedDelta3]
-        ]);
-        $this->assertJsonStringEqualsJsonString(
+        ];
+        $this->assertEquals(
             $expectedJson3,
             fallbackPathForCode($lat, $lng, $longCode),
             'Fallback path for long code (>=13) is incorrect'
@@ -284,7 +285,7 @@ class ReverseLookupTest extends TestCase
         ];
 
         $fallbackB = fallbackPathForCode(50.0, 50.0, $kode);
-        $this->assertJsonStringEqualsJsonString($fallbackB, effectiveCandidatePath($candidateB));
+        $this->assertEquals($fallbackB, effectiveCandidatePath($candidateB));
 
         // Scenario C: No path (but valid coordinates)
         $candidateC = [
@@ -294,7 +295,7 @@ class ReverseLookupTest extends TestCase
         ];
 
         $fallbackC = fallbackPathForCode($lat, $lng, $kode);
-        $this->assertJsonStringEqualsJsonString($fallbackC, effectiveCandidatePath($candidateC));
+        $this->assertEquals($fallbackC, effectiveCandidatePath($candidateC));
 
         // Scenario D: Null coordinates or code
         $candidateD1 = ['lat' => $lat, 'lng' => $lng, 'kode' => null];
